@@ -1,0 +1,17 @@
+---
+galaxy_info:
+  role_name: sftpgo_docker
+  namespace: pypb
+  author: pypb
+  description: Sets up SFTPGo in Docker using Docker Compose
+  license: Apache-2.0
+  min_ansible_version: '2.15'
+  platforms:
+    - name: Debian
+      versions:
+        - all
+    - name: Ubuntu
+      versions:
+        - all
+  galaxy_tags:
+    - sftpgo

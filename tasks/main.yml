@@ -1,0 +1,24 @@
+---
+- name: Create directories
+  ansible.builtin.include_tasks:
+    file: dirs.yml
+    apply:
+      tags: dirs
+  tags: always
+  when: sftpgo_docker_deploy
+
+- name: Deploy service SFTPGo
+  ansible.builtin.include_tasks:
+    file: sftpgo.yml
+    apply:
+      tags: sftpgo
+  tags: always
+  when: sftpgo_docker_deploy
+
+- name: Install plugins
+  ansible.builtin.include_tasks:
+    file: plugins.yml
+    apply:
+      tags: plugins
+  tags: always
+  when: sftpgo_docker_deploy

@@ -1,0 +1,16 @@
+---
+- name: Download plugin
+  ansible.builtin.get_url:
+    checksum: "{{ item.checksum | default('') }}"
+    dest: "{{ sftpgo_docker_plugin_dir }}/{{ item.dest }}"
+    mode: '0775'
+    url: "{{ item.url }}"
+  loop: "{{ sftpgo_docker_plugins }}"
+
+- name: Download plugindata
+  ansible.builtin.get_url:
+    checksum: "{{ item.checksum | default('') }}"
+    dest: "{{ sftpgo_docker_plugindata_dir }}/{{ item.dest }}"
+    mode: '0664'
+    url: "{{ item.url }}"
+  loop: "{{ sftpgo_docker_plugindata }}"

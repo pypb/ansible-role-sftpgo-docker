@@ -1,0 +1,55 @@
+---
+sftpgo_docker_deploy: false
+
+sftpgo_docker_image_tag: v2.5
+sftpgo_docker_uid: 11337
+sftpgo_docker_gid: 11337
+
+# the components will live in subdirectories under here
+sftpgo_docker_base_dir: "/srv/sftpgo/{{ sftpgo_docker_docker_compose_project_prefix }}"
+sftpgo_docker_data_dir: "{{ sftpgo_docker_base_dir }}/data"
+sftpgo_docker_home_dir: "{{ sftpgo_docker_base_dir }}/home"
+sftpgo_docker_plugin_dir: "{{ sftpgo_docker_base_dir }}/plugin"
+sftpgo_docker_plugindata_dir: "{{ sftpgo_docker_data_dir }}/plugindata"
+
+# mode to use on created files and dirs.
+# please note that most containers run as non-root with different uid's
+sftpgo_docker_default_dir_mode: '2775'
+sftpgo_docker_default_file_mode: '0664'
+sftpgo_docker_docker_file_mode: '0660'
+
+# set a prefix on the docker compose project names
+# useful if you want to separate dev/test/prod with different names
+sftpgo_docker_docker_compose_project_prefix: "prod"
+
+# timezone will mostly affect timestamp on container log output
+sftpgo_docker_timezone: UTC
+
+# labels example with traefik reverse-proxy
+sftpgo_docker_labels:
+  - "traefik.enable=false"
+  - "traefik.http.routers.sftpgo.rule=Host(`www.mydomain.local`) && PathPrefix(`/sftpgo`)"
+  - "traefik.http.routers.sftpgo.service=sftpgo"
+  - "traefik.http.routers.sftpgo.tls=true"
+  - "traefik.http.routers.sftpgo.tls.certresolver=letsencrypt"
+  - "traefik.http.services.sftpgo.loadbalancer.server.port=8080"
+  - "traefik.docker.network={{ sftpgo_docker_network_name }}"
+
+# if using with a reverse-proxy, set this to a docker network reachable by the proxy
+sftpgo_docker_network_name: "default"
+
+sftpgo_docker_sftpgo_envs:
+  SFTPGO_HTTPD__BINDINGS__0__ENABLE_WEB_ADMIN: "true"
+  SFTPGO_HTTPD__BINDINGS__0__ENABLE_WEB_CLIENT: "true"
+  SFTPGO_HTTPD__BINDINGS__0__ENABLE_REST_API: "false"
+  SFTPGO_HTTPD__BINDINGS__0__PROXY_ALLOWED: "172.16.0.0/12,10.0.0.0/8,192.168.0.0/16"
+  SFTPGO_HTTPD__BINDINGS__0__CLIENT_IP_PROXY_HEADER: "X-Forwarded-For"
+  SFTPGO_HTTPD__WEB_ROOT: "/sftpgo"
+
+# exposed ports
+sftpgo_docker_ports:
+  - 8080:8080
+  - 2022:2022
+
+sftpgo_docker_plugins: []
+sftpgo_docker_plugindata: []

@@ -1,0 +1,32 @@
+---
+- name: Create base dir
+  ansible.builtin.file:
+    path: "{{ sftpgo_docker_base_dir }}"
+    mode: "{{ sftpgo_docker_default_dir_mode }}"
+    state: directory
+
+- name: Create service dir
+  ansible.builtin.file:
+    path: "{{ sftpgo_docker_base_dir }}/sftpgo"
+    mode: "{{ sftpgo_docker_default_dir_mode }}"
+    state: directory
+
+- name: Create data dir
+  ansible.builtin.file:
+    path: "{{ sftpgo_docker_data_dir }}"
+    mode: "{{ sftpgo_docker_default_dir_mode }}"
+    owner: "{{ sftpgo_docker_uid }}"
+    state: directory
+
+- name: Create home dir
+  ansible.builtin.file:
+    path: "{{ sftpgo_docker_home_dir }}"
+    mode: "{{ sftpgo_docker_default_dir_mode }}"
+    owner: "{{ sftpgo_docker_uid }}"
+    state: directory
+
+- name: Create plugin dir
+  ansible.builtin.file:
+    path: "{{ sftpgo_docker_plugin_dir }}"
+    mode: "{{ sftpgo_docker_default_dir_mode }}"
+    state: directory

@@ -1,0 +1,24 @@
+---
+services:
+  sftpgo:
+    image: drakkan/sftpgo:${SFTPGO_TAG}
+    restart: unless-stopped
+    user: "${SFTPGO_UID}:${SFTPGO_GID}"
+    env_file:
+      - sftpgo.env
+    networks:
+      - ${DOCKER_NETWORK_NAME}
+    volumes:
+      - ${SFTPGO_DATA_DIR}:/srv/sftpgo
+      - ${SFTPGO_HOME_DIR}:/var/lib/sftpgo
+      - ${SFTPGO_PLUGIN_DIR}:/var/lib/sftpgo/plugin:ro
+      - ${SFTPGO_PLUGINDATA_DIR}:/var/lib/sftpgo/plugindata
+    labels: {{ sftpgo_docker_labels|tojson }}
+    ports: {{ sftpgo_docker_ports|tojson }}
+
+{% if sftpgo_docker_network_name != 'default' %}
+networks:
+  {{ sftpgo_docker_network_name }}:
+    external: true
+    name: {{ sftpgo_docker_network_name }}
+{% endif %}
