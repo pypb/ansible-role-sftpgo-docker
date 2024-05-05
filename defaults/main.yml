@@ -8,8 +8,9 @@ sftpgo_docker_gid: 11337
 # the components will live in subdirectories under here
 sftpgo_docker_base_dir: "/srv/sftpgo/{{ sftpgo_docker_docker_compose_project_prefix }}"
 sftpgo_docker_data_dir: "{{ sftpgo_docker_base_dir }}/data"
-sftpgo_docker_home_dir: "{{ sftpgo_docker_base_dir }}/home"
-sftpgo_docker_plugin_dir: "{{ sftpgo_docker_base_dir }}/plugin"
+sftpgo_docker_userdata_dir: "{{ sftpgo_docker_data_dir }}/userdata"
+sftpgo_docker_home_dir: "{{ sftpgo_docker_data_dir }}/home"
+sftpgo_docker_plugin_dir: "{{ sftpgo_docker_data_dir }}/plugin"
 sftpgo_docker_plugindata_dir: "{{ sftpgo_docker_data_dir }}/plugindata"
 
 # mode to use on created files and dirs.

@@ -9,7 +9,7 @@ services:
     networks:
       - ${DOCKER_NETWORK_NAME}
     volumes:
-      - ${SFTPGO_DATA_DIR}:/srv/sftpgo
+      - ${SFTPGO_USERDATA_DIR}:/srv/sftpgo
       - ${SFTPGO_HOME_DIR}:/var/lib/sftpgo
       - ${SFTPGO_PLUGIN_DIR}:/var/lib/sftpgo/plugin:ro
       - ${SFTPGO_PLUGINDATA_DIR}:/var/lib/sftpgo/plugindata
