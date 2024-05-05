@@ -54,3 +54,6 @@ sftpgo_docker_ports:
 
 sftpgo_docker_plugins: []
 sftpgo_docker_plugindata: []
+
+# list of additional docker volume mappings
+sftpgo_docker_extra_volumes: []
